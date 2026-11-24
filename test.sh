@@ -19,4 +19,22 @@ do
     )
 
     echo "$instance instance id is $instance_id"
+
+    if [ $instance != "frontend" ]; then
+         Ip=$( aws ec2 describe-instances \
+         --instance.ids "$instance_id" \
+         --query "Reservations[].Instances[].privateIpAddress" \
+          --output text
+          )
+          r53_record="$instance.$domain_name"
+          else
+           Ip=$( aws ec2 describe-instances \
+         --instance.ids "$instance_id" \
+         --query "Reservations[].Instances[].PublicIpAddress" \
+          --output text
+          )
+          r53_record="$domain_name"
+          echo "r53 record ${r53_record}"
+        fi
+    #
 done
