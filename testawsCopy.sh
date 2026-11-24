@@ -12,6 +12,8 @@ do
     --instance-type t3.micro \
     --security-group-ids sg-0cb7138403dda788c\
     --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$}]')
+    echo "$instandId"
 done
+
 
 
